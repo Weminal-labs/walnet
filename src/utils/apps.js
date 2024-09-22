@@ -319,6 +319,12 @@ const apps = [
     type: "app",
     action: "WALNET",
   },
+  {
+    name: "Aptos",
+    icon: "aptos",
+    type: "app",
+    action: "APTOS",
+  },
 ];
 
 for (let i = 0; i < installed.length; i++) {

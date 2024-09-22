@@ -20,6 +20,7 @@ export * from "./apps/terminal";
 export * from "./apps/whiteboard";
 export * from "./apps/algorand";
 export * from "./apps/walnet";
+export * from "./apps/aptos";
 
 export const ScreenPreview = () => {
   const tasks = useSelector((state) => state.taskbar);

@@ -3,8 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Battery from "../../components/shared/Battery";
 import { Icon, Image } from "../../utils/general";
 import "./back.scss";
+import { Aptos, AptosConfig, Network, Account } from "@aptos-labs/ts-sdk";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import { WalletSelector as AntdWalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
+
+// Import actions
+import { storeAccount } from "../../actions";
+
+// Import utils
+import { BrowserStorageUtils } from "../../utils/browser_storage";
 
 export const Background = () => {
   const wall = useSelector((state) => state.wallpaper);
@@ -116,10 +123,81 @@ export const LockScreen = (props) => {
     if (btn) btn.click();
   };
 
+  const fundAccount = async (aptos, account) => {
+    const transaction = await aptos.fundAccount({
+      accountAddress: account.address,
+      amount: 100,
+    });
+
+    return transaction;
+  };
+
+  const getAccountInfo = async (aptos, account) => {
+    try {
+      const result = await aptos.getAccountInfo({
+        accountAddress: account.address,
+      });
+      return result;
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const getAccountModules = async (aptos, account) => {
+    try {
+      const result = await aptos.getAccountModules({
+        accountAddress: account.address,
+      });
+      return result;
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const getAccountOwnedTokens = async (aptos, account) => {
+    try {
+      const result = await aptos.getAccountOwnedTokens({
+        accountAddress: account.address,
+      });
+      return result;
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const init = async () => {
+    const aptosConfig = new AptosConfig({ network: Network.TESTNET });
+    const aptos = new Aptos(aptosConfig);
+    let myAccount = BrowserStorageUtils.getItem("acnt");
+
+    // Create new account
+    // if (!myAccount) {
+    //   const account = Account.generate();
+    //   await fundAccount(aptos, account);
+
+    //   account.publicKey = account.publicKey.toString();
+    //   account.accountAddress = account.accountAddress.toString();
+    //   account.signingScheme = account.signingScheme.toString();
+
+    //   delete account.privateKey;
+
+    //   BrowserStorageUtils.setItem("acnt", account);
+    //   myAccount = account;
+    // }
+
+    if (!myAccount) {
+      await fundAccount(aptos, account);
+      BrowserStorageUtils.setItem("acnt", account);
+      myAccount = account;
+    }
+
+    storeAccount(myAccount);
+    proceed();
+  };
+
   React.useEffect(() => {
-    if (account !== null) {
-      console.log("Sign in done");
-      proceed();
+    if (account) {
+      init();
     }
   }, [account]);
 
