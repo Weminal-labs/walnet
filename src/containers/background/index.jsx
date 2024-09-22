@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Battery from "../../components/shared/Battery";
 import { Icon, Image } from "../../utils/general";
 import "./back.scss";
-import { ConnectButton, useConnectWallet, useWallets } from "@mysten/dapp-kit";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { WalletSelector as AntdWalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
 
 export const Background = () => {
   const wall = useSelector((state) => state.wallpaper);
@@ -75,8 +76,7 @@ export const LockScreen = (props) => {
   const [passType, setType] = useState(1);
   const [forgot, setForget] = useState(false);
   const dispatch = useDispatch();
-  const wallets = useWallets();
-  const { mutate: connect } = useConnectWallet();
+  const { account } = useWallet();
 
   const userName = useSelector((state) => state.setting.person.name);
 
@@ -111,6 +111,18 @@ export const LockScreen = (props) => {
     if (e.key == "Enter") proceed();
   };
 
+  const handleLogin = () => {
+    const btn = document.querySelector(".wallet-button");
+    if (btn) btn.click();
+  };
+
+  React.useEffect(() => {
+    if (account !== null) {
+      console.log("Sign in done");
+      proceed();
+    }
+  }, [account]);
+
   return (
     <div
       className={"lockscreen " + (props.dir == -1 ? "slowfadein" : "")}
@@ -122,6 +134,9 @@ export const LockScreen = (props) => {
       data-action="splash"
       data-blur={lock}
     >
+      <div className="hidden">
+        <AntdWalletSelector />
+      </div>
       <div className="splashScreen mt-40" data-faded={lock}>
         <div className="text-6xl font-semibold text-gray-100">
           {new Date().toLocaleTimeString("en-US", {
@@ -152,25 +167,14 @@ export const LockScreen = (props) => {
           Sign in
         </div> */}
         <div>
-          {wallets.map((wallet) => {
-            if (wallet.name !== "Sui Wallet") return null;
-            return (
-              <ConnectButton
-                className="flex items-center mt-6 signInBtn"
-                onClick={() => {
-                  connect(
-                    { wallet },
-                    {
-                      onSuccess: () => {
-                        console.log("connected");
-                        proceed();
-                      },
-                    }
-                  );
-                }}
-              />
-            );
-          })}
+          <button
+            className="flex items-center mt-6 signInBtn cursor-pointer"
+            onClick={() => {
+              handleLogin();
+            }}
+          >
+            Sign in
+          </button>
         </div>
 
         {/*   <input type={passType?"text":"password"} value={password} onChange={action}

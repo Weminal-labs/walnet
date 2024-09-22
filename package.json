@@ -6,7 +6,9 @@
   "private": true,
   "dependencies": {
     "-": "^0.0.1",
+    "@aptos-labs/aptos-faucet-client": "^0.2.0",
     "@aptos-labs/ts-sdk": "^1.28.0",
+    "@aptos-labs/wallet-adapter-ant-design": "^3.0.6",
     "@aptos-labs/wallet-adapter-react": "^3.5.6",
     "@bitget-wallet/aptos-wallet-adapter": "^0.1.2",
     "@crowdin/cli": "^3.19.4",

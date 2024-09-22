@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useDispatch, useSelector } from "react-redux";
+import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import "./i18nextConf";
 import "./index.css";
 
@@ -70,6 +72,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
 function App() {
   const apps = useSelector((state) => state.apps);
   const wall = useSelector((state) => state.wallpaper);
+  const { account, connect } = useWallet();
   const dispatch = useDispatch();
 
   const afterMath = (event) => {
@@ -88,7 +91,7 @@ function App() {
     } catch (err) {}
 
     var actionType0 = getComputedStyle(event.target).getPropertyValue(
-      "--prefix",
+      "--prefix"
     );
 
     ess.forEach((item, i) => {
@@ -132,6 +135,9 @@ function App() {
       window.onstart = setTimeout(() => {
         // console.log("prematurely loading ( ﾉ ﾟｰﾟ)ﾉ");
         dispatch({ type: "WALLBOOTED" });
+        const aptosConfig = new AptosConfig({ network: Network.TESTNET });
+        const aptos = new Aptos(aptosConfig);
+        console.log("Aptos:", aptos);
       }, 5000);
     }
   });
