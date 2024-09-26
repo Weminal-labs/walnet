@@ -2,6 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Aptos as _Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
 
+// Import components
+import CopyIcon from "../../../components/icons/CopyIcon";
+
 // Import resources
 import { ToolBar } from "../../../utils/general";
 import "./assets/fileexpo.scss";
@@ -11,6 +14,13 @@ export const Aptos = () => {
   const account = useSelector((state) => state.account.data);
   const [aptos, setAptos] = React.useState(null);
   const [coin, setCoin] = React.useState(0);
+
+  const hideAddress = (address) => {
+    if (!address) return;
+    const first4Digits = address.slice(0, 4);
+    const last4Digits = address.slice(-4);
+    return first4Digits + " .. " + last4Digits;
+  };
 
   const getCoin = async (aptos) => {
     const resource = await aptos.getAccountResource({
@@ -32,20 +42,21 @@ export const Aptos = () => {
   }, [aptos]);
 
   React.useEffect(() => {
+    new Notification("Copyied");
     const aptosConfig = new AptosConfig({ network: Network.TESTNET });
     setAptos(new _Aptos(aptosConfig));
   }, [account]);
 
   return (
     <div
-      className="msfiles floatTab dpShad"
+      className="blur-glass shadow-lg fixedTRTab dpShad w-full max-w-[375px]"
       data-size={wnapp.size}
       data-max={wnapp.max}
       style={{
         ...(wnapp.size == "cstm" ? wnapp.dim : null),
         zIndex: wnapp.z,
       }}
-      data-hide={wnapp.hide}
+      data-hide={false}
       id={wnapp.icon + "App"}
     >
       <ToolBar
@@ -53,16 +64,26 @@ export const Aptos = () => {
         icon={wnapp.icon}
         size={wnapp.size}
         name={wnapp.name}
+        fixed={true}
       />
-      <section className="w-full h-full p-3">
+      <section className="px-2 pb-2 overflow-hidden">
         <header>
-          <h1 className="font-bold">Welcome to Aptos</h1>
-          <div>
-            <p>Your account information</p>
-            <p>Address: {account.address}</p>
-            <p>Coin: {coin}</p>
-          </div>
+          <h1 className="font-bold">Main account</h1>
         </header>
+        <div>
+          <div className="flex items-center">
+            <span className="break-words">
+              <span className="font-bold">Address:</span>{" "}
+              {hideAddress(account.address)}
+            </span>
+            <button className="flex items-center cursor-pointer bg-transparent border-none outline-none">
+              <CopyIcon />
+            </button>
+          </div>
+          <div>
+            <span className="font-bold">Balance:</span> {coin}
+          </div>
+        </div>
       </section>
     </div>
   );
