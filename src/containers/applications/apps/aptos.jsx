@@ -9,6 +9,9 @@ import CopyIcon from "../../../components/icons/CopyIcon";
 import { ToolBar } from "../../../utils/general";
 import "./assets/fileexpo.scss";
 
+// Import utils
+import { aptosClient } from "../../../utils/aptos_client";
+
 export const Aptos = () => {
   const wnapp = useSelector((state) => state.apps.aptos);
   const account = useSelector((state) => state.account.data);
@@ -34,7 +37,7 @@ export const Aptos = () => {
   React.useEffect(() => {
     if (aptos) {
       getCoin(aptos).then((resource) => {
-        const value = resource.coin.value;
+        const value = parseInt(resource.coin.value) / 1e8;
         console.log("Resource: ", resource);
         setCoin(value);
       });
@@ -42,9 +45,7 @@ export const Aptos = () => {
   }, [aptos]);
 
   React.useEffect(() => {
-    new Notification("Copyied");
-    const aptosConfig = new AptosConfig({ network: Network.TESTNET });
-    setAptos(new _Aptos(aptosConfig));
+    setAptos(aptosClient());
   }, [account]);
 
   return (

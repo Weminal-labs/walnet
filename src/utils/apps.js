@@ -325,6 +325,12 @@ const apps = [
     type: "app",
     action: "APTOS",
   },
+  {
+    name: "Aptogotchi",
+    icon: "aptogotchi",
+    type: "app",
+    action: "APTOGOTCHI",
+  },
 ];
 
 for (let i = 0; i < installed.length; i++) {

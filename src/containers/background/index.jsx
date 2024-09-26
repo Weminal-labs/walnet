@@ -12,6 +12,7 @@ import { storeAccount } from "../../actions";
 
 // Import utils
 import { BrowserStorageUtils } from "../../utils/browser_storage";
+import { aptosClient } from "../../utils/aptos_client";
 
 export const Background = () => {
   const wall = useSelector((state) => state.wallpaper);
@@ -166,8 +167,7 @@ export const LockScreen = (props) => {
   };
 
   const init = async () => {
-    const aptosConfig = new AptosConfig({ network: Network.TESTNET });
-    const aptos = new Aptos(aptosConfig);
+    const aptos = aptosClient();
     let myAccount = BrowserStorageUtils.getItem("acnt");
 
     // Create new account
