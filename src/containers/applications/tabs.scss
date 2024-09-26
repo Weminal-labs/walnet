@@ -227,6 +227,7 @@
     }
   }
 }
+
 @keyframes blink {
   from,
   to {
@@ -260,5 +261,54 @@
   &:focus {
     outline: none;
     border: none;
+  }
+}
+
+.fixedTRTab {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+
+  border-radius: 6px;
+  transition: all cubic-bezier(0.85, 0.14, 0.14, 0.85) 250ms;
+  transform-origin: center;
+  display: flex;
+  flex-direction: column;
+
+  &[data-size="full"] {
+    .closeBtn,
+    .toolbar,
+    .windowScreen {
+      border-radius: 0;
+    }
+  }
+
+  &[data-size="cstm"] {
+    // border-radius: 0;
+    filter: none;
+    // border: solid 1px #c7c7c7;
+  }
+
+  &[data-hide="true"] {
+    top: 0;
+    left: 0;
+    transform: scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &[data-max="false"] {
+    top: calc(100% + 10px);
+    transform: scale(0.6);
+    transform-origin: bottom;
+    opacity: 0;
+    pointer-events: none;
+    border-radius: 6px;
+  }
+
+  &[data-size="mini"] {
+    top: 10%;
+    left: 20%;
+    border-radius: 6px;
   }
 }

@@ -409,7 +409,10 @@ export const ToolBar = (props) => {
           className="topInfo flex flex-grow items-center"
           data-float={props.float != null}
           onClick={toolClick}
-          onMouseDown={toolDrag}
+          onMouseDown={(e) => {
+            if (props.fixed) return;
+            toolDrag(e);
+          }}
           data-op="0"
         >
           <Icon src={props.icon} width={14} />

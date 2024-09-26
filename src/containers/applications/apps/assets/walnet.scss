@@ -1,4 +1,4 @@
-.walnetApp {
+.blur-glass {
   --bg: #f3f3f3;
 
   background: var(--walnet-app);
@@ -8,12 +8,12 @@
 }
 
 @supports (container-type: inline-size) {
-  .walnetApp {
+  .blur-glass {
     min-width: 360px;
   }
 }
 
-.walnetApp .restWindow {
+.blur-glass .restWindow {
   font-size: 14px;
   height: 100%;
 
@@ -131,7 +131,7 @@
       }
 
       @for $i from 1 to 12 {
-        .navLink:nth-child(#{$i}).selected~.marker {
+        .navLink:nth-child(#{$i}).selected ~ .marker {
           transform: translateY(((40 * ($i - 1)) + 12) + px);
         }
       }
@@ -173,7 +173,9 @@
     }
 
     .image-preview {
-      box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+      box-shadow: rgba(240, 46, 170, 0.4) 5px 5px,
+        rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px,
+        rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
     }
 
     .input-epochs {
@@ -326,9 +328,7 @@
           }
 
           .selected {
-            box-shadow:
-              0 0 0 2px var(--bg),
-              0 0 0 4px var(--clrPrm);
+            box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--clrPrm);
             border-radius: 2px;
           }
         }
@@ -497,7 +497,7 @@
   }
 }
 
-body[data-theme="dark"] .walnetApp {
+body[data-theme="dark"] .blur-glass {
   --bg: #202020;
 
   .restWindow {

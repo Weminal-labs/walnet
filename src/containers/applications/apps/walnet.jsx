@@ -167,7 +167,7 @@ export const Walnet = () => {
 
   return (
     <div
-      className="walnetApp shadow-lg floatTab dpShad "
+      className="blur-glass shadow-lg floatTab dpShad"
       data-size={wnapp.size}
       data-max={wnapp.max}
       style={{
