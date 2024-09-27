@@ -5,6 +5,9 @@ import { useWallet } from "@aptos-labs/wallet-adapter-react";
 // Import components
 import { PetImage, QuestionMarkImage } from "./Pet";
 
+// Import hooks
+import { useAccount } from "../../../hooks/useAccount";
+
 // Import utils
 import { aptosClient, surfClient } from "../../../utils/aptos_client";
 import { padAddressIfNeeded } from "../../../utils/address";
@@ -17,6 +20,7 @@ export function Mint() {
     React.useState(false);
 
   const { account, network, signAndSubmitTransaction } = useWallet();
+  const { refreshBalance } = useAccount();
 
   const fetchPet = React.useCallback(async () => {
     if (!account?.address) return;
@@ -94,6 +98,7 @@ export function Mint() {
         .then(() => {
           fetchPet();
           setMintSucceeded(true);
+          refreshBalance();
         });
     } catch (error) {
       console.error(error);
@@ -112,7 +117,7 @@ export function Mint() {
     <div className="flex flex-col gap-6 max-w-md self-center m-4">
       {mintSucceeded && (
         <Confetti
-          className="w-full"
+          className="w-full h-full"
           recycle={false}
           numberOfPieces={3000}
           tweenDuration={15000}

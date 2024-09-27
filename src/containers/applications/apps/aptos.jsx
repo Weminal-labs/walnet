@@ -5,18 +5,18 @@ import { Aptos as _Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
 // Import components
 import CopyIcon from "../../../components/icons/CopyIcon";
 
-// Import resources
-import { ToolBar } from "../../../utils/general";
-import "./assets/fileexpo.scss";
+// Import hooks
+import { useAccount } from "../../../hooks/useAccount";
 
 // Import utils
 import { aptosClient } from "../../../utils/aptos_client";
 
+import { ToolBar } from "../../../utils/general";
+import "./assets/fileexpo.scss";
+
 export const Aptos = () => {
   const wnapp = useSelector((state) => state.apps.aptos);
-  const account = useSelector((state) => state.account.data);
-  const [aptos, setAptos] = React.useState(null);
-  const [coin, setCoin] = React.useState(0);
+  const { account, metadata, refreshBalance } = useAccount();
 
   const hideAddress = (address) => {
     if (!address) return;
@@ -25,27 +25,8 @@ export const Aptos = () => {
     return first4Digits + " .. " + last4Digits;
   };
 
-  const getCoin = async (aptos) => {
-    const resource = await aptos.getAccountResource({
-      accountAddress: account.address,
-      resourceType: "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>",
-    });
-
-    return resource;
-  };
-
   React.useEffect(() => {
-    if (aptos) {
-      getCoin(aptos).then((resource) => {
-        const value = parseInt(resource.coin.value) / 1e8;
-        console.log("Resource: ", resource);
-        setCoin(value);
-      });
-    }
-  }, [aptos]);
-
-  React.useEffect(() => {
-    setAptos(aptosClient());
+    if (account) refreshBalance();
   }, [account]);
 
   return (
@@ -75,14 +56,14 @@ export const Aptos = () => {
           <div className="flex items-center">
             <span className="break-words">
               <span className="font-bold">Address:</span>{" "}
-              {hideAddress(account.address)}
+              {hideAddress(account?.address)}
             </span>
             <button className="flex items-center cursor-pointer bg-transparent border-none outline-none">
               <CopyIcon />
             </button>
           </div>
           <div>
-            <span className="font-bold">Balance:</span> {coin}
+            <span className="font-bold">Balance:</span> {metadata.balance}
           </div>
         </div>
       </section>
