@@ -17,7 +17,7 @@ export function useAccount() {
   };
 
   const handleLogin = () => {
-    const btn = document.querySelector(".wallet-button");
+    const btn = document.getElementById("connectWalletBtn");
     if (btn) btn.click();
   };
 

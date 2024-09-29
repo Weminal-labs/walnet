@@ -34,12 +34,12 @@ const apps = [
     type: "app",
     action: "TASKMANAGER",
   },
-  {
-    name: "File Explorer",
-    icon: "explorer",
-    type: "app",
-    action: "EXPLORER",
-  },
+  // {
+  //   name: "File Explorer",
+  //   icon: "explorer",
+  //   type: "app",
+  //   action: "EXPLORER",
+  // },
   {
     name: "Browser",
     icon: "edge",
@@ -307,18 +307,18 @@ const apps = [
   //   action: "EXTERNAL",
   //   payload: "https://algorand-racetrack.openedu101.com"
   // },
-  {
-    name: "Algorand",
-    icon: "algorand",
-    type: "app",
-    action: "ALGORAND",
-  },
-  {
-    name: "Walnet",
-    icon: "walrus",
-    type: "app",
-    action: "WALNET",
-  },
+  // {
+  //   name: "Algorand",
+  //   icon: "algorand",
+  //   type: "app",
+  //   action: "ALGORAND",
+  // },
+  // {
+  //   name: "Walnet",
+  //   icon: "walrus",
+  //   type: "app",
+  //   action: "WALNET",
+  // },
   {
     name: "Aptos",
     icon: "aptos",

@@ -101,6 +101,7 @@ export function Mint() {
           refreshBalance();
         });
     } catch (error) {
+      fetchPet();
       console.error(error);
     } finally {
       setTransactionInProgress(false);
@@ -109,7 +110,7 @@ export function Mint() {
 
   React.useEffect(() => {
     if (!account?.address || !network) return;
-
+    console.log("Account:", account);
     fetchPet();
   }, [account?.address, fetchPet, network]);
 

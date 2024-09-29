@@ -5,7 +5,8 @@ import { Icon, Image } from "../../utils/general";
 import "./back.scss";
 import { Aptos, AptosConfig, Network, Account } from "@aptos-labs/ts-sdk";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
-import { WalletSelector as AntdWalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
+// import { WalletSelector as AntdWalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
+import { WalletSelector } from "../../components/shared/WalletSelector";
 
 // Import hooks
 import { useAccount } from "../../hooks/useAccount";
@@ -133,7 +134,7 @@ export const LockScreen = (props) => {
       data-blur={lock}
     >
       <div className="hidden">
-        <AntdWalletSelector />
+        <WalletSelector />
       </div>
       <div className="splashScreen mt-40" data-faded={lock}>
         <div className="text-6xl font-semibold text-gray-100">
