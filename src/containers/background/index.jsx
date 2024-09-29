@@ -5,13 +5,11 @@ import { Icon, Image } from "../../utils/general";
 import "./back.scss";
 import { Aptos, AptosConfig, Network, Account } from "@aptos-labs/ts-sdk";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
-import { WalletSelector as AntdWalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
+// import { WalletSelector as AntdWalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
+import { WalletSelector } from "../../components/shared/WalletSelector";
 
-// Import actions
-import { storeAccount } from "../../actions";
-
-// Import utils
-import { BrowserStorageUtils } from "../../utils/browser_storage";
+// Import hooks
+import { useAccount } from "../../hooks/useAccount";
 
 export const Background = () => {
   const wall = useSelector((state) => state.wallpaper);
@@ -84,6 +82,7 @@ export const LockScreen = (props) => {
   const [forgot, setForget] = useState(false);
   const dispatch = useDispatch();
   const { account } = useWallet();
+  const { handleLogin } = useAccount();
 
   const userName = useSelector((state) => state.setting.person.name);
 
@@ -118,87 +117,9 @@ export const LockScreen = (props) => {
     if (e.key == "Enter") proceed();
   };
 
-  const handleLogin = () => {
-    const btn = document.querySelector(".wallet-button");
-    if (btn) btn.click();
-  };
-
-  const fundAccount = async (aptos, account) => {
-    const transaction = await aptos.fundAccount({
-      accountAddress: account.address,
-      amount: 100,
-    });
-
-    return transaction;
-  };
-
-  const getAccountInfo = async (aptos, account) => {
-    try {
-      const result = await aptos.getAccountInfo({
-        accountAddress: account.address,
-      });
-      return result;
-    } catch (error) {
-      return error;
-    }
-  };
-
-  const getAccountModules = async (aptos, account) => {
-    try {
-      const result = await aptos.getAccountModules({
-        accountAddress: account.address,
-      });
-      return result;
-    } catch (error) {
-      return error;
-    }
-  };
-
-  const getAccountOwnedTokens = async (aptos, account) => {
-    try {
-      const result = await aptos.getAccountOwnedTokens({
-        accountAddress: account.address,
-      });
-      return result;
-    } catch (error) {
-      return error;
-    }
-  };
-
-  const init = async () => {
-    const aptosConfig = new AptosConfig({ network: Network.TESTNET });
-    const aptos = new Aptos(aptosConfig);
-    let myAccount = BrowserStorageUtils.getItem("acnt");
-
-    // Create new account
-    // if (!myAccount) {
-    //   const account = Account.generate();
-    //   await fundAccount(aptos, account);
-
-    //   account.publicKey = account.publicKey.toString();
-    //   account.accountAddress = account.accountAddress.toString();
-    //   account.signingScheme = account.signingScheme.toString();
-
-    //   delete account.privateKey;
-
-    //   BrowserStorageUtils.setItem("acnt", account);
-    //   myAccount = account;
-    // }
-
-    if (!myAccount) {
-      await fundAccount(aptos, account);
-      BrowserStorageUtils.setItem("acnt", account);
-      myAccount = account;
-    }
-
-    storeAccount(myAccount);
-    proceed();
-  };
-
   React.useEffect(() => {
-    if (account) {
-      init();
-    }
+    if (!account) return;
+    proceed();
   }, [account]);
 
   return (
@@ -213,7 +134,7 @@ export const LockScreen = (props) => {
       data-blur={lock}
     >
       <div className="hidden">
-        <AntdWalletSelector />
+        <WalletSelector />
       </div>
       <div className="splashScreen mt-40" data-faded={lock}>
         <div className="text-6xl font-semibold text-gray-100">

@@ -273,6 +273,10 @@ export const storeAccount = (account) => {
   store.dispatch({ type: "STORE_ACCOUNT", payload: account });
 };
 
+export const storeAccountBalance = (balance) => {
+  store.dispatch({ type: "STORE_BALANCE", payload: balance });
+};
+
 export const removeAccount = () => {
   store.dispatch({ type: "REMOVE_ACCOUNT" });
 };
