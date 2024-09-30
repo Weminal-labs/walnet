@@ -15,7 +15,7 @@ import { ToolBar } from "../../../utils/general";
 import "./assets/fileexpo.scss";
 
 export const Aptos = () => {
-  const wnapp = useSelector((state) => state.apps.aptos);
+  const wnapp = useSelector((state) => state.apps.wallet);
   const { account, metadata, refreshBalance } = useAccount();
 
   const hideAddress = (address) => {

@@ -285,7 +285,7 @@ const apps = [
     icon: "github",
     type: "app",
     action: "EXTERNAL",
-    payload: "https://github.com/blueedgetechno/win11React",
+    payload: "https://github.com/Weminal-labs/walnet",
   },
   {
     name: "Unescape",
@@ -320,16 +320,29 @@ const apps = [
   //   action: "WALNET",
   // },
   {
-    name: "Aptos",
-    icon: "aptos",
+    name: "My Wallet",
+    icon: "wallet",
     type: "app",
-    action: "APTOS",
+    action: "WALLET",
   },
   {
     name: "Aptogotchi",
     icon: "aptogotchi",
     type: "app",
     action: "APTOGOTCHI",
+  },
+  {
+    name: "Aptos Explorer",
+    icon: "aptos_explorer",
+    type: "app",
+    action: "APTOS_EXPLORER",
+  },
+  {
+    name: "Dorahacks",
+    icon: "dorahacks",
+    type: "app",
+    action: "EXTERNAL",
+    payload: "https://dorahacks.io/buidl/16640/",
   },
 ];
 
