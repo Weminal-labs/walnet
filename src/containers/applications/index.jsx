@@ -22,6 +22,7 @@ export * from "./apps/whiteboard";
 // export * from "./apps/walnet";
 export * from "./apps/aptos";
 export * from "./apps/aptogotchi";
+export * from "./apps/aptos_explorer";
 
 export const ScreenPreview = () => {
   const tasks = useSelector((state) => state.taskbar);

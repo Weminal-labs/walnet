@@ -5,7 +5,7 @@ import { Icon, Image } from "../../utils/general";
 import "./back.scss";
 import { Aptos, AptosConfig, Network, Account } from "@aptos-labs/ts-sdk";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
-// import { WalletSelector as AntdWalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
+import { WalletSelector as AntdWalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
 import { WalletSelector } from "../../components/shared/WalletSelector";
 
 // Import hooks

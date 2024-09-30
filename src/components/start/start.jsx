@@ -120,7 +120,7 @@ export const StartMenu = () => {
             <div className="menuUp">
               <div className="pinnedApps">
                 <div className="stAcbar">
-                  <div className="gpname">Pinned</div>
+                  <div className="gpname">Everything about Walnet</div>
                   <div
                     className="gpbtn prtclk"
                     onClick={clickDispatch}
@@ -152,7 +152,7 @@ export const StartMenu = () => {
               </div>
               <div className="recApps win11Scroll">
                 <div className="stAcbar">
-                  <div className="gpname">Recommended</div>
+                  <div className="gpname">Aptos Named Services</div>
                   <div className="gpbtn none">
                     <div>More</div>
                     <Icon fafa="faChevronRight" width={8} />
@@ -210,7 +210,7 @@ export const StartMenu = () => {
                       <div className="ltName">
                         {i == 0 ? "#" : String.fromCharCode(i + 64)}
                       </div>
-                    </div>,
+                    </div>
                   );
 
                   ldx.forEach((app, j) => {
@@ -224,7 +224,7 @@ export const StartMenu = () => {
                       >
                         <Icon className="pnIcon" src={app.icon} width={24} />
                         <div className="appName">{app.name}</div>
-                      </div>,
+                      </div>
                     );
                   });
 
