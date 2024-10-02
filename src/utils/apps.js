@@ -338,11 +338,37 @@ const apps = [
     action: "APTOS_EXPLORER",
   },
   {
+    name: "My Collection",
+    icon: "collection",
+    type: "app",
+    action: "COLLECTION",
+  },
+  {
+    name: "X",
+    icon: "x",
+    type: "app",
+    action: "EXTERNAL",
+    payload: "https://x.com/Walnet363756",
+  },
+  {
     name: "Dorahacks",
     icon: "dorahacks",
     type: "app",
     action: "EXTERNAL",
     payload: "https://dorahacks.io/buidl/16640/",
+  },
+  {
+    name: "Aptos Names",
+    icon: "ans",
+    type: "app",
+    action: "EXTERNAL",
+    payload: "https://www.aptosnames.com/",
+  },
+  {
+    name: "Aptos Explorer",
+    icon: "aptos_explorer",
+    type: "app",
+    action: "APTOS_EXPLORER",
   },
 ];
 

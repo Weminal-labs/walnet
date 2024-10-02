@@ -264,24 +264,16 @@
   }
 }
 
-.fixedTRTab {
+.mini-fixed-window,
+.fixed-window {
   position: fixed;
   right: 1rem;
-  top: 1rem;
 
   border-radius: 6px;
   transition: all cubic-bezier(0.85, 0.14, 0.14, 0.85) 250ms;
   transform-origin: center;
   display: flex;
   flex-direction: column;
-
-  &[data-size="full"] {
-    .closeBtn,
-    .toolbar,
-    .windowScreen {
-      border-radius: 0;
-    }
-  }
 
   &[data-size="cstm"] {
     // border-radius: 0;
@@ -307,9 +299,35 @@
   }
 
   &[data-size="mini"] {
-    top: 10%;
-    left: 20%;
+    right: 1rem;
     border-radius: 6px;
+  }
+}
+
+.mini-fixed-window {
+  &[data-size="full"] {
+    .closeBtn,
+    .toolbar,
+    .windowScreen {
+      border-radius: 0;
+    }
+  }
+}
+
+.fixed-window {
+  &[data-size="full"] {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+
+    top: 0;
+    right: 0;
+
+    .closeBtn,
+    .toolbar,
+    .windowScreen {
+      border-radius: 0;
+    }
   }
 }
 

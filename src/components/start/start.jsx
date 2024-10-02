@@ -152,7 +152,7 @@ export const StartMenu = () => {
               </div>
               <div className="recApps win11Scroll">
                 <div className="stAcbar">
-                  <div className="gpname">Aptos Named Services</div>
+                  <div className="gpname">Aptos' services</div>
                   <div className="gpbtn none">
                     <div>More</div>
                     <Icon fafa="faChevronRight" width={8} />
