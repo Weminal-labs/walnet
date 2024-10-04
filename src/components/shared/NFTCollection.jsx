@@ -8,7 +8,9 @@ export default function NFTCollection({ data, ...props }) {
   const [hovering, setHovering] = useState(false);
   if (!data) {
     return (
-      <div {...props} className="bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl mx-auto overflow-hidden w-[100%] cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-3xl"
+      <div
+        {...props}
+        className="bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl mx-auto overflow-hidden w-[100%] cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-3xl"
       >
         {/* Skeleton for CFT CARD */}
         <div className="bg-white bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl max-w-sm mx-auto overflow-hidden animate-pulse">
@@ -82,10 +84,17 @@ export default function NFTCollection({ data, ...props }) {
   const token = data.current_token_data;
 
   return (
-    <div {...props} className="bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl mx-auto overflow-hidden w-[100%] cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-3xl">
+    <div
+      {...props}
+      className="bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl mx-auto overflow-hidden w-[100%] cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-3xl"
+    >
       <div className="relative">
         <Lens lensSize={150} hovering={hovering} setHovering={setHovering}>
-          <img src={token.current_collection.uri} alt="NFT" className="w-full h-40 object-cover" />
+          <img
+            src={token.current_collection.uri}
+            alt="NFT"
+            className="w-full h-40 object-cover bg-[url(/img/nft_placeholder.png)] bg-cover"
+          />
         </Lens>
         <div className="absolute top-2 left-2 bg-white/10 backdrop-blur-sm rounded-full px-2 py-1 flex items-center space-x-1 z-20">
           <img src="/img/icon/collection.png" alt="Aptos" className="w-4 h-4" />
@@ -116,7 +125,9 @@ export default function NFTCollection({ data, ...props }) {
           <div className="flex items-center justify-between mt-4 text-xs text-gray-500">
             <span className="font-medium">Created by</span>
             <div className="flex items-center space-x-2">
-              <span className="truncate max-w-[150px]">{token.current_collection.creator_address}</span>
+              <span className="truncate max-w-[150px]">
+                {token.current_collection.creator_address}
+              </span>
               <button className="text-blue-400 hover:text-blue-300 transition-colors">
                 <CopyIcon />
               </button>

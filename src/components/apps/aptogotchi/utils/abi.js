@@ -1,5 +1,5 @@
 export const ABI = {
-  address: "0x422446a7bd3eda7ba0be8e8f4a3b254ede1e687b1e6b3473179013c6d0bf71a4",
+  address: "0x73b4639d21796c01ee707a547f9153adb39de5955739a6251380dfbf85569836",
   name: "aptogotchi",
   friends: [],
   exposed_functions: [
@@ -22,7 +22,7 @@ export const ABI = {
       return: [
         "bool",
         "u8",
-        "0x422446a7bd3eda7ba0be8e8f4a3b254ede1e687b1e6b3473179013c6d0bf71a4::aptogotchi::AptogotchiParts",
+        "0x73b4639d21796c01ee707a547f9153adb39de5955739a6251380dfbf85569836::aptogotchi::AptogotchiParts",
       ],
     },
     {
@@ -73,7 +73,7 @@ export const ABI = {
         { name: "health", type: "u8" },
         {
           name: "parts",
-          type: "0x422446a7bd3eda7ba0be8e8f4a3b254ede1e687b1e6b3473179013c6d0bf71a4::aptogotchi::AptogotchiParts",
+          type: "0x73b4639d21796c01ee707a547f9153adb39de5955739a6251380dfbf85569836::aptogotchi::AptogotchiParts",
         },
         { name: "extend_ref", type: "0x1::object::ExtendRef" },
         { name: "mutator_ref", type: "0x4::token::MutatorRef" },

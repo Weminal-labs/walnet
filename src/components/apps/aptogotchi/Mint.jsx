@@ -89,7 +89,12 @@ export function Mint() {
         data: {
           function: `${ABI.address}::aptogotchi::create_aptogotchi`,
           typeArguments: [],
-          functionArguments: [],
+          functionArguments: [
+            "examples", // default name
+            1, // default body
+            1, // default ear
+            1, // default face
+          ],
         },
       });
       await aptosClient()
@@ -111,9 +116,10 @@ export function Mint() {
 
   React.useEffect(() => {
     if (!account?.address || !network) return;
-    console.log("Account:", account);
     fetchPet();
   }, [account?.address, fetchPet, network]);
+
+  console.log("Pet:", myPet);
 
   return (
     <div className="flex flex-col gap-6 max-w-md self-center m-4">

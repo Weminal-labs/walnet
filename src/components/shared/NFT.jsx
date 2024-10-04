@@ -3,7 +3,10 @@ import CopyIcon from "../icons/CopyIcon";
 export default function NFT({ data, ...props }) {
   if (!data) {
     return (
-      <div {...props} className="bg-white bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl max-w-sm mx-auto overflow-hidden">
+      <div
+        {...props}
+        className="bg-white bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl max-w-sm mx-auto overflow-hidden"
+      >
         {/* Skeleton for CFT CARD */}
         <div className="bg-white bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl max-w-sm mx-auto overflow-hidden animate-pulse">
           <div className="relative">
@@ -68,9 +71,16 @@ export default function NFT({ data, ...props }) {
   const token = data.current_token_data;
 
   return (
-    <div {...props} className="bg-white bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl max-w-sm mx-auto overflow-hidden">
+    <div
+      {...props}
+      className="bg-white bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl max-w-sm mx-auto overflow-hidden"
+    >
       <div className="relative">
-        <img src={token.current_collection.uri} alt="NFT" className="w-full h-40 object-cover" />
+        <img
+          src={token.current_collection.uri}
+          alt="NFT"
+          className="w-full h-40 object-cover bg-[url(/img/nft_placeholder.png)] bg-cover"
+        />
         <div className="absolute top-2 left-2 bg-white/10 backdrop-blur-sm rounded-full px-2 py-1 flex items-center space-x-1">
           <img src="/img/icon/collection.png" alt="Aptos" className="w-4 h-4" />
           <span className="text-white text-xs">My Collection</span>
@@ -95,7 +105,9 @@ export default function NFT({ data, ...props }) {
         <div className="flex items-center justify-between mt-4 text-xs text-gray-500">
           <span className="font-medium">Created by</span>
           <div className="flex items-center space-x-2">
-            <span className="truncate max-w-[150px]">{token.current_collection.creator_address}</span>
+            <span className="truncate max-w-[150px]">
+              {token.current_collection.creator_address}
+            </span>
             <button className="text-blue-400 hover:text-blue-300 transition-colors">
               <CopyIcon />
             </button>
