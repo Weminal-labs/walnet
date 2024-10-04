@@ -24,6 +24,7 @@ export * from "./apps/aptos";
 export * from "./apps/aptogotchi";
 export * from "./apps/aptos_explorer";
 export * from "./apps/collection";
+export * from "./apps/aptodigi";
 
 export const ScreenPreview = () => {
   const tasks = useSelector((state) => state.taskbar);

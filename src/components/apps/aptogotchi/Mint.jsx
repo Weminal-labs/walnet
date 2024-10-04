@@ -9,9 +9,10 @@ import { PetImage, QuestionMarkImage } from "./Pet";
 import { useAccount } from "../../../hooks/useAccount";
 
 // Import utils
-import { aptosClient, surfClient } from "../../../utils/aptos_client";
-import { padAddressIfNeeded } from "../../../utils/address";
-import { ABI } from "../../../utils/abi";
+import { aptosClient } from "../../../utils/aptos_client";
+import { AccountUtils } from "../../../utils/account";
+import { ABI } from "./utils/abi";
+import { surfClient } from "./utils/surfClient";
 
 export function Mint() {
   const [myPet, setMyPet] = React.useState();
@@ -31,7 +32,7 @@ export function Mint() {
       },
     });
 
-    const collectionAddress = padAddressIfNeeded(
+    const collectionAddress = AccountUtils.padAddressIfNeeded(
       aptogotchiCollectionAddressResponse[0]
     );
 

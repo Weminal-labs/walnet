@@ -28,6 +28,7 @@ var { taskbar, desktop, pinned, recent } = {
     "Walnet",
     "My Wallet",
     "Aptogotchi",
+    "Aptodigi",
   ],
   pinned: (localStorage.getItem("pinned") &&
     JSON.parse(localStorage.getItem("pinned"))) || [
@@ -89,6 +90,8 @@ export const recentApps = icons
   .sort((a, b) => {
     return recent.indexOf(a.name) > recent.indexOf(b.name) ? 1 : -1;
   });
+
+console.log("Recent App:", recentApps);
 
 export const allApps = icons.filter((app) => {
   return app.type === "app";
