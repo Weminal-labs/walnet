@@ -26,13 +26,7 @@ export const Collection = () => {
       })
       .then((response) => {
         // Receive only five
-        setTokens([
-          response[0],
-          response[1],
-          response[2],
-          response[3],
-          response[4],
-        ]);
+        setTokens(response);
       })
       .catch((error) => console.error("Collection Error:", error));
   }, [account]);
@@ -63,13 +57,7 @@ export const Collection = () => {
           <div className="w-full grid grid-cols-7">
             {tokens &&
               tokens.map((token, index) => {
-                return (
-                  <NFT
-                    className="mb-3 mx-3"
-                    key={index}
-                    data={token.current_token_data}
-                  />
-                );
+                return <NFT className="mb-3 mx-3" key={index} data={token} />;
               })}
           </div>
         </div>

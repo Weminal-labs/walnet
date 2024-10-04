@@ -365,10 +365,10 @@ const apps = [
     payload: "https://www.aptosnames.com/",
   },
   {
-    name: "Aptos Explorer",
-    icon: "aptos_explorer",
+    name: "Aptodigi",
+    icon: "aptodigi",
     type: "app",
-    action: "APTOS_EXPLORER",
+    action: "APTODIGI",
   },
 ];
 

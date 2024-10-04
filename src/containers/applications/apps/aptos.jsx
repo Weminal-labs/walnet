@@ -10,9 +10,10 @@ import NFT from "../../../components/shared/NFT";
 import { useAccount } from "../../../hooks/useAccount";
 
 // Import utils
+import { AccountUtils } from "../../../utils/account";
 import { aptosClient } from "../../../utils/aptos_client";
-
 import { ToolBar } from "../../../utils/general";
+
 import "./assets/fileexpo.scss";
 
 export const Aptos = () => {
@@ -21,13 +22,6 @@ export const Aptos = () => {
   const { account, metadata, refreshBalance } = useAccount();
 
   const [tokens, setTokens] = React.useState(null);
-
-  const hideAddress = (address) => {
-    if (!address) return;
-    const first4Digits = address.slice(0, 4);
-    const last4Digits = address.slice(-4);
-    return first4Digits + " .. " + last4Digits;
-  };
 
   React.useEffect(() => {
     if (!account) return;
@@ -83,7 +77,7 @@ export const Aptos = () => {
             <div className="flex items-center">
               <span className="break-words">
                 <span className="font-bold text-lg">Address:</span>{" "}
-                {hideAddress(account?.address)}
+                {AccountUtils.hideAddress(account?.address)}
               </span>
               <button className="flex items-center cursor-pointer bg-transparent border-none outline-none">
                 <CopyIcon />
@@ -103,13 +97,7 @@ export const Aptos = () => {
             <div className="overflow-y-auto max-h-[250px] win11Scroll">
               {tokens &&
                 tokens.map((token, index) => {
-                  return (
-                    <NFT
-                      className="mb-3"
-                      key={index}
-                      data={token.current_token_data}
-                    />
-                  );
+                  return <NFT className="mb-3" key={index} data={token} />;
                 })}
             </div>
             <button
