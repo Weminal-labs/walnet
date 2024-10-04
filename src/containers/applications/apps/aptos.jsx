@@ -21,7 +21,7 @@ import { cn } from "../../../utils/tailwind_merge";
 import GridPattern from "../../../components/shared/animated-grid-pattern";
 import { PlusIcon } from "lucide-react";
 
-const BlurCard = ({ account, hideAddress, metadata }) => {
+const BlurCard = ({ account, metadata }) => {
   return (
     <div className="bg-white bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl p-6 max-w-sm mx-auto">
       <h2 className="text-xl font-semibold text-gray-200 mb-4">Main Account</h2>
@@ -33,8 +33,8 @@ const BlurCard = ({ account, hideAddress, metadata }) => {
         <div className="flex items-center space-x-3">
           <img src="/img/icon/ui/google.png" alt="Google" className="w-6 h-6" />
           <div>
-            <p className="text-sm font-medium text-gray-200">{account?.email || '162001605@dntu.edu.vn'}</p>
-            <p className="text-xs text-gray-400">{hideAddress(account?.address) || '0x205f...62a8'}</p>
+            <p className="text-sm font-medium text-gray-200">{account?.email || "no email"}</p>
+            <p className="text-xs text-gray-400 truncate max-w-[150px]">{account?.address}</p>
           </div>
         </div>
         <button className="text-blue-400 hover:text-blue-300 transition-colors">
@@ -139,7 +139,7 @@ export const Aptos = () => {
         </div>
 
         <div className="w-full">
-          <BlurCard account={account} hideAddress={hideAddress} metadata={metadata} />
+          <BlurCard account={account} metadata={metadata} />
         </div>
 
         <div className="my-4 w-full">
