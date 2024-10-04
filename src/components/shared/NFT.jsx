@@ -67,8 +67,6 @@ export default function NFT({ data, ...props }) {
 
   const token = data.current_token_data;
 
-  const token = data.current_token_data;
-
   return (
     <div {...props} className="bg-white bg-opacity-[0.01] backdrop-filter backdrop-blur-3xl rounded-xl shadow-2xl max-w-sm mx-auto overflow-hidden">
       <div className="relative">
