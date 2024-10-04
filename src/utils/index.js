@@ -1,64 +1,75 @@
 import icons from "./apps";
 
 var { taskbar, desktop, pinned, recent } = {
-  taskbar: (localStorage.getItem("taskbar") &&
-    JSON.parse(localStorage.getItem("taskbar"))) || [
-      "Settings",
-      "File Explorer",
-      "Browser",
-      "Store",
-      "Spotify",
+  taskbar:
+    (localStorage.getItem("taskbar") &&
+      JSON.parse(localStorage.getItem("taskbar"))) ||
+    [
+      // "Settings",
+      // "File Explorer",
+      // "Browser",
+      // "Store",
+      // "Spotify",
     ],
   desktop: (localStorage.getItem("desktop") &&
     JSON.parse(localStorage.getItem("desktop"))) || [
-      "Blue",
-      "Unescape",
-      "Recycle Bin",
-      "File Explorer",
-      "Store",
-      "Browser",
-      "Github",
-      "Spotify",
-      "Buy me a coffee",
-      "Algorand",
-      "Walnet",
-    ],
+    // "Blue",
+    // "Unescape",
+    // "Recycle Bin",
+    // "Aptos Explorer",
+    // "File Explorer",
+    // "Store",
+    "Browser",
+    // "Github",
+    // "Spotify",
+    // "Buy me a coffee",
+    "My Collection",
+    "Algorand",
+    "Walnet",
+    "My Wallet",
+    "Aptogotchi",
+    "Aptodigi",
+  ],
   pinned: (localStorage.getItem("pinned") &&
     JSON.parse(localStorage.getItem("pinned"))) || [
-      "Browser",
-      "Get Started",
-      "Task Manager",
-      "Mail",
-      "Settings",
-      "Store",
-      "Unescape",
-      "Buy me a coffee",
-      "Notepad",
-      "Whiteboard",
-      "Calculator",
-      "Spotify",
-      "Twitter",
-      "File Explorer",
-      "Terminal",
-      "Github",
-      "Discord",
-      "Camera",
-    ],
+    // "Browser",
+    // "Get Started",
+    // "Task Manager",
+    // "Mail",
+    // "Settings",
+    // "Store",
+    // "Unescape",
+    // "Buy me a coffee",
+    // "Notepad",
+    // "Whiteboard",
+    // "Calculator",
+    // "Spotify",
+    // "Twitter",
+    // "File Explorer",
+    // "Terminal",
+    "X",
+    "Github",
+    "Dorahacks",
+    // "Discord",
+    // "Camera",
+  ],
   recent: (localStorage.getItem("recent") &&
     JSON.parse(localStorage.getItem("recent"))) || [
-      "Mail",
-      "Twitter",
-      "Terminal",
-      "Github",
-      "File Explorer",
-      "Spotify",
-      "Edge",
-    ],
+    // "Mail",
+    // "Twitter",
+    // "Terminal",
+    // "Github",
+    // "File Explorer",
+    // "Spotify",
+    // "Edge",
+    "Aptos Explorer",
+    "Aptos Names",
+  ],
 };
 
-if (desktop.includes("Buy me a coffee") === false) {
-  desktop.push("Buy me a coffee");
-}
+// if (desktop.includes("Buy me a coffee") === false) {
+//   desktop.push("Buy me a coffee");
+// }
 
 export const taskApps = icons.filter((x) => taskbar.includes(x.name));
 
@@ -79,6 +90,8 @@ export const recentApps = icons
   .sort((a, b) => {
     return recent.indexOf(a.name) > recent.indexOf(b.name) ? 1 : -1;
   });
+
+console.log("Recent App:", recentApps);
 
 export const allApps = icons.filter((app) => {
   return app.type === "app";

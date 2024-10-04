@@ -9,7 +9,7 @@ export * from "./apps/calculator";
 export * from "./apps/camera";
 export * from "./apps/discord";
 export * from "./apps/edge";
-export * from "./apps/explorer";
+// export * from "./apps/explorer";
 export * from "./apps/getstarted";
 export * from "./apps/notepad";
 export * from "./apps/settings";
@@ -18,8 +18,13 @@ export * from "./apps/store";
 export * from "./apps/taskmanager";
 export * from "./apps/terminal";
 export * from "./apps/whiteboard";
-export * from "./apps/algorand";
-export * from "./apps/walnet";
+// export * from "./apps/algorand";
+// export * from "./apps/walnet";
+export * from "./apps/aptos";
+export * from "./apps/aptogotchi";
+export * from "./apps/aptos_explorer";
+export * from "./apps/collection";
+export * from "./apps/aptodigi";
 
 export const ScreenPreview = () => {
   const tasks = useSelector((state) => state.taskbar);

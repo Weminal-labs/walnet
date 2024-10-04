@@ -7,6 +7,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import * as FaIcons from "@fortawesome/free-solid-svg-icons";
 import * as FaRegIcons from "@fortawesome/free-regular-svg-icons";
 import * as AllIcons from "./icons";
+import { cn } from "./tailwind_merge";
 
 String.prototype.strip = function (c) {
   var i = 0,
@@ -409,60 +410,68 @@ export const ToolBar = (props) => {
           className="topInfo flex flex-grow items-center"
           data-float={props.float != null}
           onClick={toolClick}
-          onMouseDown={toolDrag}
+          onMouseDown={(e) => {
+            if (props.fixed) return;
+            toolDrag(e);
+          }}
           data-op="0"
         >
-          <Icon src={props.icon} width={14} />
+          <Icon src={props.icon} width={props?.icon_size || 14} />
           <div
-            className="appFullName text-xss"
+            className={cn(props?.classname_title || "text-xss", "appFullName")}
             data-white={props.invert != null}
           >
             {props.name}
           </div>
         </div>
         <div className="actbtns flex items-center">
-          <Icon
-            invert={props.invert}
-            click={props.app}
-            payload="mnmz"
-            pr
-            src="minimize"
-            ui
-            width={12}
-          />
-          <div
-            className="snapbox h-full"
-            data-hv={snap}
-            onMouseOver={openSnap}
-            onMouseLeave={closeSnap}
-          >
+          {!props.hidden_minimize && (
             <Icon
               invert={props.invert}
               click={props.app}
-              ui
+              payload="mnmz"
               pr
+              src="minimize"
+              ui
               width={12}
-              payload="mxmz"
-              src={props.size == "full" ? "maximize" : "maxmin"}
             />
-            <SnapScreen
+          )}
+          {!props.hidden_modify_screen && (
+            <div
+              className="snapbox h-full"
+              data-hv={snap}
+              onMouseOver={openSnap}
+              onMouseLeave={closeSnap}
+            >
+              <Icon
+                invert={props.invert}
+                click={props.app}
+                ui
+                pr
+                width={12}
+                payload="mxmz"
+                src={props.size == "full" ? "maximize" : "maxmin"}
+              />
+              <SnapScreen
+                invert={props.invert}
+                app={props.app}
+                snap={snap}
+                closeSnap={closeSnap}
+              />
+            </div>
+          )}
+          {!props.hidden_close && (
+            <Icon
+              className="closeBtn"
               invert={props.invert}
-              app={props.app}
-              snap={snap}
-              closeSnap={closeSnap}
+              click={props.app}
+              payload="close"
+              pr
+              src="close"
+              ui
+              width={14}
             />
-            {/* {snap?<SnapScreen app={props.app} closeSnap={closeSnap}/>:null} */}
-          </div>
-          <Icon
-            className="closeBtn"
-            invert={props.invert}
-            click={props.app}
-            payload="close"
-            pr
-            src="close"
-            ui
-            width={14}
-          />
+          )}
         </div>
       </div>
       <div className="resizecont topone">

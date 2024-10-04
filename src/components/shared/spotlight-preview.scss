@@ -1,0 +1,19 @@
+@keyframes spotlight-fade {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-spotlight {
+  animation: spotlight-fade 4s ease-in-out infinite;
+}
+
+.spotlight-ellipse {
+  fill-opacity: 0.04;
+}

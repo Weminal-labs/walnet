@@ -34,12 +34,12 @@ const apps = [
     type: "app",
     action: "TASKMANAGER",
   },
-  {
-    name: "File Explorer",
-    icon: "explorer",
-    type: "app",
-    action: "EXPLORER",
-  },
+  // {
+  //   name: "File Explorer",
+  //   icon: "explorer",
+  //   type: "app",
+  //   action: "EXPLORER",
+  // },
   {
     name: "Browser",
     icon: "edge",
@@ -285,7 +285,7 @@ const apps = [
     icon: "github",
     type: "app",
     action: "EXTERNAL",
-    payload: "https://github.com/blueedgetechno/win11React",
+    payload: "https://github.com/Weminal-labs/walnet",
   },
   {
     name: "Unescape",
@@ -307,17 +307,68 @@ const apps = [
   //   action: "EXTERNAL",
   //   payload: "https://algorand-racetrack.openedu101.com"
   // },
+  // {
+  //   name: "Algorand",
+  //   icon: "algorand",
+  //   type: "app",
+  //   action: "ALGORAND",
+  // },
+  // {
+  //   name: "Walnet",
+  //   icon: "walrus",
+  //   type: "app",
+  //   action: "WALNET",
+  // },
   {
-    name: "Algorand",
-    icon: "algorand",
+    name: "My Wallet",
+    icon: "wallet",
     type: "app",
-    action: "ALGORAND",
+    action: "WALLET",
   },
   {
-    name: "Walnet",
-    icon: "walrus",
+    name: "Aptogotchi",
+    icon: "aptogotchi",
     type: "app",
-    action: "WALNET",
+    action: "APTOGOTCHI",
+  },
+  {
+    name: "Aptos Explorer",
+    icon: "aptos_explorer",
+    type: "app",
+    action: "APTOS_EXPLORER",
+  },
+  {
+    name: "My Collection",
+    icon: "collection",
+    type: "app",
+    action: "COLLECTION",
+  },
+  {
+    name: "X",
+    icon: "x",
+    type: "app",
+    action: "EXTERNAL",
+    payload: "https://x.com/Walnet363756",
+  },
+  {
+    name: "Dorahacks",
+    icon: "dorahacks",
+    type: "app",
+    action: "EXTERNAL",
+    payload: "https://dorahacks.io/buidl/16640/",
+  },
+  {
+    name: "Aptos Names",
+    icon: "ans",
+    type: "app",
+    action: "EXTERNAL",
+    payload: "https://www.aptosnames.com/",
+  },
+  {
+    name: "Aptodigi",
+    icon: "aptodigi",
+    type: "app",
+    action: "APTODIGI",
   },
 ];
 
