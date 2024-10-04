@@ -3,14 +3,20 @@ import { useSelector } from "react-redux";
 import { ToolBar } from "../../../utils/general";
 import "./assets/fileexpo.scss";
 
+// import "../../../containers/applications/apps/assets/store.scss";
+
 // Import components
-import NFT from "../../../components/shared/NFT";
+import NFTCollection from "../../../components/shared/NFTCollection";
 
 // Import hooks
 import { useAccount } from "../../../hooks/useAccount";
 
 // Import utils
 import { aptosClient } from "../../../utils/aptos_client";
+import { Spotlight } from "../../../components/shared/splotlight-preview";
+import { cn } from "../../../utils/tailwind_merge";
+import { DotPattern } from "../../../components/shared/dot-patern";
+import NFTDemo from "../../../components/shared/NFTLens";
 
 export const Collection = () => {
   const wnapp = useSelector((state) => state.apps.collection);
@@ -33,7 +39,7 @@ export const Collection = () => {
 
   return (
     <div
-      className="msfiles floatTab dpShad"
+      className="blur-glass bg-neutral-800/50 floatTab dpShad overflow-hidden relative"
       data-size={wnapp.size}
       data-max={wnapp.max}
       style={{
@@ -43,25 +49,50 @@ export const Collection = () => {
       data-hide={wnapp.hide}
       id={wnapp.icon + "App"}
     >
+      <DotPattern
+        className={cn(
+          "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
+        )}
+      />
+      <Spotlight
+        className={cn(
+          "absolute top-0 left-[40%]",
+          "h-[200%] w-[200%]"
+        )}
+        fill="white"
+      />
+      <Spotlight
+        className={cn(
+          "absolute -top-10 left-[80%]",
+          "h-[200%] w-[100%]"
+        )}
+        fill="white"
+      />
+
       <ToolBar
         app={wnapp.action}
         icon={wnapp.icon}
         size={wnapp.size}
         name={wnapp.name}
+        icon_size={18}
+        classname_title="text-xs"
       />
-      <section className="px-2 pb-2 h-full contentarea">
-        <header>
-          <h1 className="text-2xl font-bold mb-3">My collections</h1>
-        </header>
-        <div className="win11Scroll">
-          <div className="w-full grid grid-cols-7">
-            {tokens &&
-              tokens.map((token, index) => {
-                return <NFT className="mb-3 mx-3" key={index} data={token} />;
-              })}
-          </div>
+
+      <div className="w-full h-full p-6 overflow-y-auto win11Scroll">
+        <h1 className="text-2xl font-bold mb-6 text-white">My collections</h1>
+        <div className="grid grid-cols-1 gap-4 auto-rows-auto"
+          style={{
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))'
+          }}>
+          {tokens && tokens.map((token, index) => (
+            <NFTCollection
+              key={index}
+              data={token}
+            />
+            // <NFTDemo />
+          ))}
         </div>
-      </section>
+      </div>
     </div>
   );
 };
