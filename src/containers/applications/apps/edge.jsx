@@ -4,13 +4,16 @@ import { Icon, ToolBar, LazyComponent } from "../../../utils/general";
 
 export const EdgeMenu = () => {
   const wnapp = useSelector((state) => state.apps.edge);
-  const [url, setUrl] = useState("https://www.google.com/?igu=1");
+  const [url, setUrl] = useState(
+    "https://landing-page-docs-walnet.vercel.app/"
+  );
   const [ierror, setErr] = useState(true);
   const [isTyping, setTyping] = useState(false);
   const [hist, setHist] = useState(["https://bing.com", "https://bing.com"]);
   const dispatch = useDispatch();
 
   const iframes = {
+    "https://landing-page-docs-walnet.vercel.app/": "Walnet Docs",
     "https://www.google.com/webhp?igu=1": "Google",
     "https://bing.com": "Bing",
     "https://www.youtube.com/embed/m0EHSoZzHEA": "Youtube",

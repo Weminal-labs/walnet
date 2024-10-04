@@ -11,9 +11,10 @@ import NFT from "../../../components/shared/NFT";
 import { useAccount } from "../../../hooks/useAccount";
 
 // Import utils
+import { AccountUtils } from "../../../utils/account";
 import { aptosClient } from "../../../utils/aptos_client";
-
 import { ToolBar } from "../../../utils/general";
+
 import "./assets/fileexpo.scss";
 import { Spotlight } from "../../../components/shared/splotlight-preview";
 import { cn } from "../../../utils/tailwind_merge";
@@ -50,13 +51,6 @@ export const Aptos = () => {
   const { account, metadata, refreshBalance } = useAccount();
 
   const [tokens, setTokens] = React.useState(null);
-
-  const hideAddress = (address) => {
-    if (!address) return;
-    const first4Digits = address.slice(0, 4);
-    const last4Digits = address.slice(-4);
-    return first4Digits + " .. " + last4Digits;
-  };
 
   React.useEffect(() => {
     if (!account) return;
