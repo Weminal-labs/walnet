@@ -1,0 +1,132 @@
+:root {
+  --background-color: rgba(255, 255, 255, 0.05);
+  --text-color: #333333;
+  --border-color: rgba(0, 0, 0, 0.05);
+  --hover-color: rgba(255, 255, 255, 0.1);
+  --button-color: rgba(74, 144, 226, 0.8);
+  --button-hover-color: rgba(58, 123, 200, 0.9);
+}
+
+[data-theme="dark"] {
+  --background-color: rgba(0, 0, 0, 0.15);
+  --text-color: #ffffff;
+  --border-color: rgba(255, 255, 255, 0.05);
+  --hover-color: rgba(255, 255, 255, 0.05);
+  --button-color: rgba(59, 130, 246, 0.8);
+  --button-hover-color: rgba(37, 99, 235, 0.9);
+}
+
+.stats-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.stat-item {
+  flex: 1;
+  background-color: var(--background-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.stat-item:hover {
+  background-color: var(--hover-color);
+}
+
+.stat-title {
+  font-size: 0.8rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.mint-container {
+  background-color: var(--background-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+}
+
+.mint-form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.mint-input {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.mint-button {
+  background-color: var(--button-color);
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mint-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.mint-fee {
+  display: block;
+  margin-top: 0.75rem;
+  text-align: right;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 640px) {
+  .stats-container {
+    flex-direction: column;
+  }
+
+  .mint-form {
+    flex-direction: column;
+  }
+
+  .mint-input,
+  .mint-button {
+    width: 100%;
+  }
+}

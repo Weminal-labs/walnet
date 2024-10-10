@@ -55,7 +55,7 @@ export default function NFTDemo({ data, ...props }) {
   const token = data.current_token_data;
 
   return (
-    <div {...props} className="w-full relative rounded-xl overflow-hidden max-w-md mx-auto bg-gradient-to-r from-white/5 to-white/25 p-8 my-10">
+    <div {...props} className="w-full relative rounded-xl overflow-hidden max-w-md mx-auto bg-gradient-to-r from-[#1D2235] to-[#121318]  p-8 my-10">
       <Rays />
       <Beams />
       <div className="relative z-10">

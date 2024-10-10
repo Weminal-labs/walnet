@@ -182,6 +182,13 @@ export const changeTheme = () => {
   var icon = thm == "light" ? "sun" : "moon";
 
   document.body.dataset.theme = thm;
+
+  if (thm === "dark") {
+    document.body.classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+  }
+
   store.dispatch({ type: "STNGTHEME", payload: thm });
   store.dispatch({ type: "PANETHEM", payload: icon });
   store.dispatch({ type: "WALLSET", payload: thm == "light" ? 0 : 1 });

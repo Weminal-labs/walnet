@@ -370,6 +370,12 @@ const apps = [
     type: "app",
     action: "APTODIGI",
   },
+  {
+    name: "AptosDNet",
+    icon: "aptosdnet",
+    type: "app",
+    action: "APTOSDINET",
+  },
 ];
 
 for (let i = 0; i < installed.length; i++) {

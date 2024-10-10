@@ -117,7 +117,7 @@ function ConnectWalletDialog({ close, ...walletSortingOptions }) {
             {hasAptosConnectWallets ? (
               <>
                 <span>Log in or sign up</span>
-                <span>with Social + Aptos Connect</span>
+                <span>with Social + Move Connect</span>
               </>
             ) : (
               "Connect Wallet"
@@ -137,7 +137,7 @@ function ConnectWalletDialog({ close, ...walletSortingOptions }) {
             <p className="flex gap-1 justify-center items-center text-muted-foreground text-sm">
               Learn more about{" "}
               <AboutAptosConnect.Trigger className="flex gap-1 py-3 items-center text-foreground">
-                Aptos Connect <ArrowRight size={16} />
+                Move Connect <ArrowRight size={16} />
               </AboutAptosConnect.Trigger>
             </p>
             <AptosPrivacyPolicy className="flex flex-col items-center py-1">
@@ -229,7 +229,7 @@ function renderEducationScreen(screen) {
           <ArrowLeft />
         </Button>
         <DialogTitle className="leading-snug text-base text-center">
-          About Aptos Connect
+          About Move Connect
         </DialogTitle>
       </DialogHeader>
 

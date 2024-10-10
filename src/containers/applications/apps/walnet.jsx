@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { ToolBar } from "../../../utils/general";
-import "./assets/walnet.scss";
+import "./assets/walmove.scss";
 import dataWalnet from "./assets/walnetData.json";
-import BlobImagePreview from "../../../components/apps/walnet/BlobImagePreview";
+import BlobImagePreview from "../../../components/apps/walmove/BlobImagePreview";
 
 // Import from utils
 import { WalnetUtils } from "../../../utils/walrus";
@@ -50,9 +50,8 @@ const ClearIcon = ({ clearSearch }) => (
 const SuiObjectListItem = ({ data, dependencies }) => {
   return (
     <div
-      className={`navLink ${
-        data.id === dependencies.objectIdSelected ? "selected" : ""
-      }`}
+      className={`navLink ${data.id === dependencies.objectIdSelected ? "selected" : ""
+        }`}
       onClick={() => dependencies.aggregateInfoTransaction(data.id)}
     >
       <p className="content-item-traction truncate w-full">{data.id}</p>
@@ -60,7 +59,7 @@ const SuiObjectListItem = ({ data, dependencies }) => {
   );
 };
 
-export const Walnet = () => {
+export const Walmove = () => {
   const wnapp = useSelector((state) => state.apps.walrus);
   const [suiObjects, setSuiObjects] = useState(
     BrowserStorageUtils.getItem("objs")
@@ -162,7 +161,7 @@ export const Walnet = () => {
 
   React.useEffect(() => {
     // Save Sui Object in local storage.
-    return function () {};
+    return function () { };
   }, []);
 
   return (
@@ -208,7 +207,7 @@ export const Walnet = () => {
               </div>
             </div>
 
-            <div className="nav_bottom win11Scroll">
+            <div className="nav_bottom win11Scroll win11ScrollDark">
               {renderableData ? (
                 <>
                   {renderableData.map((i) => (
