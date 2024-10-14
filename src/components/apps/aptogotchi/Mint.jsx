@@ -9,6 +9,7 @@ import { PetImage, QuestionMarkImage } from "./Pet";
 import { useAccount } from "../../../hooks/useAccount";
 
 // Import utils
+import { AccountUtils } from "../../../utils/account";
 import { aptosClient } from "../../../utils/aptos_client";
 import { ABI } from "./utils/abi";
 
@@ -29,7 +30,7 @@ export function Mint() {
       },
     });
 
-    const collectionAddress = padAddressIfNeeded(
+    const collectionAddress = AccountUtils.padAddressIfNeeded(
       aptogotchiCollectionAddressResponse[0]
     );
 
@@ -74,7 +75,7 @@ export function Mint() {
     try {
       const response = await signAndSubmitTransaction({
         sender: account.address,
-        payload: {
+        data: {
           function: `${ABI.address}::aptogotchi::create_aptogotchi`,
           typeArguments: [],
           functionArguments: [

@@ -44,7 +44,7 @@ export default function SubmitTask() {
     try {
       const response = await signAndSubmitTransaction({
         sender: account.address,
-        payload: {
+        data: {
           function: `${MovementDNetABI.address}::network::submit_task`,
           typeArguments: [],
           functionArguments: [taskType, computeUnits, reward],

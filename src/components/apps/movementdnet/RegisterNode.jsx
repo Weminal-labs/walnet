@@ -30,7 +30,7 @@ export default function RegisterNode() {
     try {
       const response = await signAndSubmitTransaction({
         sender: account.address,
-        payload: {
+        data: {
           function: `${MovementDNetABI.address}::network::register_node`,
           typeArguments: [],
           functionArguments: [],

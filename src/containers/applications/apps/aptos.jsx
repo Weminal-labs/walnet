@@ -91,7 +91,7 @@ export const Aptos = () => {
         ]);
       })
       .catch((error) => console.error("Collection Error:", error));
-  }, [account]);
+  }, [account, metadata.balance]);
 
   React.useEffect(() => {
     if (!account) return;
