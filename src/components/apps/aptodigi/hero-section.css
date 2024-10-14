@@ -1,0 +1,161 @@
+/* Các styles chung */
+.hero-container {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.triangle-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 3em 3em;
+  opacity: 0.05;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.hero-container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: rotate(30deg);
+  z-index: 2;
+}
+
+/* Theme sáng */
+body:not([data-theme="dark"]) .hero-container {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #333;
+}
+
+body:not([data-theme="dark"]) .triangle-background {
+  background-image: linear-gradient(60deg, #f0f0f0 25%, transparent 25%),
+    linear-gradient(120deg, #f0f0f0 25%, transparent 25%),
+    linear-gradient(180deg, #f0f0f0 25%, transparent 25%),
+    linear-gradient(240deg, #f0f0f0 25%, transparent 25%),
+    linear-gradient(300deg, #f0f0f0 25%, transparent 25%),
+    linear-gradient(360deg, #f0f0f0 25%, transparent 25%);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body:not([data-theme="dark"]) .hero-container h1 {
+  color: #1a1a1a;
+}
+
+body:not([data-theme="dark"]) .hero-container p {
+  color: #4a4a4a;
+}
+
+body:not([data-theme="dark"]) .hero-container .bg-white {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Theme tối */
+body[data-theme="dark"] .hero-container {
+  background-color: rgba(30, 30, 30, 0.2);
+  color: #f0f0f0;
+}
+
+body[data-theme="dark"] .triangle-background {
+  background-image: linear-gradient(60deg, #2a2a2a 25%, transparent 25%),
+    linear-gradient(120deg, #2a2a2a 25%, transparent 25%),
+    linear-gradient(180deg, #2a2a2a 25%, transparent 25%),
+    linear-gradient(240deg, #2a2a2a 25%, transparent 25%),
+    linear-gradient(300deg, #2a2a2a 25%, transparent 25%),
+    linear-gradient(360deg, #2a2a2a 25%, transparent 25%);
+  background-color: rgba(26, 26, 26, 0.05);
+}
+
+body[data-theme="dark"] .hero-container h1 {
+  color: #ffffff;
+}
+
+body[data-theme="dark"] .hero-container p {
+  color: #d0d0d0;
+}
+
+body[data-theme="dark"] .hero-container .bg-white {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body[data-theme="dark"] .hero-container .text-gray-800 {
+  color: #f0f0f0;
+}
+
+body[data-theme="dark"] .hero-container .text-gray-600 {
+  color: #b0b0b0;
+}
+
+body[data-theme="dark"] .hero-container .text-gray-700 {
+  color: #c0c0c0;
+}
+
+body[data-theme="dark"] .hero-container .text-gray-900 {
+  color: #ffffff;
+}
+
+/* Styles cho các nút */
+.hero-container button,
+.hero-container .bg-gray-200,
+.hero-container a {
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+body:not([data-theme="dark"]) .hero-container button,
+body:not([data-theme="dark"]) .hero-container .bg-gray-200 {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #333;
+}
+
+body:not([data-theme="dark"]) .hero-container button:hover,
+body:not([data-theme="dark"]) .hero-container .bg-gray-200:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+body[data-theme="dark"] .hero-container button,
+body[data-theme="dark"] .hero-container .bg-gray-200 {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+body[data-theme="dark"] .hero-container button:hover,
+body[data-theme="dark"] .hero-container .bg-gray-200:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.hero-container .bg-blue-500 {
+  transition: all 0.3s ease;
+}
+
+body:not([data-theme="dark"]) .hero-container .bg-blue-500 {
+  background-color: rgba(59, 130, 246, 0.7);
+}
+
+body:not([data-theme="dark"]) .hero-container .bg-blue-500:hover {
+  background-color: rgba(37, 99, 235, 0.8);
+}
+
+body[data-theme="dark"] .hero-container .bg-blue-500 {
+  background-color: rgba(59, 130, 246, 0.7);
+}
+
+body[data-theme="dark"] .hero-container .bg-blue-500:hover {
+  background-color: rgba(37, 99, 235, 0.8);
+}

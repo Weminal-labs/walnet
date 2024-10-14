@@ -78,8 +78,8 @@ export const Collection = () => {
         classname_title="text-xs"
       />
 
-      <div className="w-full h-full p-6 overflow-y-auto win11Scroll">
-        <h1 className="text-2xl font-bold mb-6 text-white">My collections</h1>
+      <div className="w-full h-full p-6 overflow-y-auto win11Scroll win11ScrollDark">
+        <h1 className="text-2xl font-bold mb-6 text-neutral-700 dark:text-gray-400">My collections</h1>
         <div className="grid grid-cols-1 gap-4 auto-rows-auto"
           style={{
             gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))'
@@ -87,9 +87,8 @@ export const Collection = () => {
           {tokens && tokens.map((token, index) => (
             <NFTCollection
               key={index}
-              data={token}
+              data={token.current_token_data}
             />
-            // <NFTDemo />
           ))}
         </div>
       </div>

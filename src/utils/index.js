@@ -29,6 +29,7 @@ var { taskbar, desktop, pinned, recent } = {
     "My Wallet",
     "Aptogotchi",
     "Aptodigi",
+    "AptosDNet",
   ],
   pinned: (localStorage.getItem("pinned") &&
     JSON.parse(localStorage.getItem("pinned"))) || [

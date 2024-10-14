@@ -10,9 +10,7 @@ import { useAccount } from "../../../hooks/useAccount";
 
 // Import utils
 import { aptosClient } from "../../../utils/aptos_client";
-import { AccountUtils } from "../../../utils/account";
 import { ABI } from "./utils/abi";
-import { surfClient } from "./utils/surfClient";
 
 export function Mint() {
   const [myPet, setMyPet] = React.useState();
@@ -20,9 +18,8 @@ export function Mint() {
   const [transactionInProgress, setTransactionInProgress] =
     React.useState(false);
 
-  const { account, network, signAndSubmitTransaction } = useWallet();
-  const { refreshBalance } = useAccount();
-
+  const { account } = useAccount();
+  const { signAndSubmitTransaction } = useWallet();
   const fetchPet = React.useCallback(async () => {
     if (!account?.address) return;
 
@@ -32,7 +29,7 @@ export function Mint() {
       },
     });
 
-    const collectionAddress = AccountUtils.padAddressIfNeeded(
+    const collectionAddress = padAddressIfNeeded(
       aptogotchiCollectionAddressResponse[0]
     );
 
@@ -61,23 +58,14 @@ export function Mint() {
     }
   }, [account?.address]);
 
-  const getAptogotchiByAddress = async (address) => {
-    return surfClient()
-      .view.get_aptogotchi({
-        functionArguments: [address],
-        typeArguments: [],
-      })
-      .then((response) => {
-        return {
-          live: response[0],
-          health: response[1],
-          parts: response[2],
-        };
-      });
-  };
+  React.useEffect(() => {
+    if (!account?.address) return;
+
+    fetchPet();
+  }, [account?.address, fetchPet]);
 
   const handleMint = async () => {
-    if (!account || !network) return;
+    if (!account) return;
 
     setMintSucceeded(false);
     setTransactionInProgress(true);
@@ -86,7 +74,7 @@ export function Mint() {
     try {
       const response = await signAndSubmitTransaction({
         sender: account.address,
-        data: {
+        payload: {
           function: `${ABI.address}::aptogotchi::create_aptogotchi`,
           typeArguments: [],
           functionArguments: [
@@ -104,22 +92,13 @@ export function Mint() {
         .then(() => {
           fetchPet();
           setMintSucceeded(true);
-          refreshBalance();
         });
     } catch (error) {
-      fetchPet();
       console.error(error);
     } finally {
       setTransactionInProgress(false);
     }
   };
-
-  React.useEffect(() => {
-    if (!account?.address || !network) return;
-    fetchPet();
-  }, [account?.address, fetchPet, network]);
-
-  console.log("Pet:", myPet);
 
   return (
     <div className="flex flex-col gap-6 max-w-md self-center m-4">

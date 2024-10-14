@@ -1,11 +1,10 @@
 import React from "react";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Import components
 import { Button } from "../../shared/button";
-import { Card, CardContent } from "../../shared/card";
 import { Input } from "../../shared/input";
 import { toast } from "../../shared/use-toast";
 
@@ -17,6 +16,8 @@ import { useAccount } from "../../../hooks/useAccount";
 import { aptosClient } from "../../../utils/aptos_client";
 import { OtherUtils } from "../../../utils/other";
 import { ABI } from "./utils/abi";
+
+import "./stats-section.css";
 
 export function StatsSection() {
   const queryClient = useQueryClient();
@@ -36,7 +37,7 @@ export function StatsSection() {
 
   const getMintNFTConfig = function () {
     return {
-      data: {
+      payload: {
         function: `${ABI.address}::${ABI.name}::mint_nft`,
         typeArguments: [],
         functionArguments: [collection.collection_id, nftCount],
@@ -70,16 +71,16 @@ export function StatsSection() {
     if (!account) {
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "You must connect a wallet before minting",
+        title: "Lỗi",
+        description: "Bạn phải kết nối ví trước khi mint",
       });
       return;
     }
     if (metadata.balance !== undefined && metadata.balance < mintFee) {
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "You do not have enough funds to mint",
+        title: "Lỗi",
+        description: "Bạn không có đủ tiền để mint",
       });
       return;
     }
@@ -90,62 +91,49 @@ export function StatsSection() {
     setNftCount(1);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (collection) getMintFee().then((mintFee) => setMintFee(mintFee));
   }, [collection]);
 
   return (
-    <section className="stats-container w-full justify-between flex-row flex">
-      <ul className="flex flex-col md:flex-row gap-10 justify-left text-nowrap">
-        {[
-          { title: "CREATED NFTs", value: maxSupply },
-          { title: "TOTAL MINTED", value: totalMinted },
-          { title: "UNIQUE HOLDERS", value: uniqueHolders },
-        ].map(({ title, value }) => (
-          <li className="basis-1/3" key={title + " " + value}>
-            <Card className="py-2 px-4 border-none">
-              <p className="label-sm text-black opacity-70 font-[600]">
-                {title}
-              </p>
-              <p className="text-[40px] font-[600] leading-10 tracking-tighter">
-                {OtherUtils.clampNumber(value)}
-              </p>
-            </Card>
-          </li>
-        ))}
-      </ul>
+    <section>
+      <div className="stats-container">
+        <div className="stat-item">
+          <span className="stat-title">Total Supply</span>
+          <span className="stat-value">
+            {OtherUtils.clampNumber(maxSupply)}
+          </span>
+        </div>
+        <div className="stat-item">
+          <span className="stat-title">Total Minted</span>
+          <span className="stat-value">
+            {OtherUtils.clampNumber(totalMinted)}
+          </span>
+        </div>
+        <div className="stat-item">
+          <span className="stat-title">Unique Holders</span>
+          <span className="stat-value">
+            {OtherUtils.clampNumber(uniqueHolders)}
+          </span>
+        </div>
+      </div>
 
-      <Card className="border-none">
-        <CardContent
-          fullPadding
-          className="flex flex-col md:flex-row gap-4 md:justify-between items-start md:items-center flex-wrap "
-        >
-          <form
-            onSubmit={handleSubmitMintNft}
-            className="flex flex-col md:flex-row gap-4"
-          >
-            <Input
-              type="number"
-              value={nftCount}
-              min="1"
-              max="10"
-              onChange={(e) => setNftCount(parseInt(e.currentTarget.value, 10))}
-              className="px-10 py-5 h-full rounded-lg outline outline-1 outline-black"
-            />
-            <Button
-              className="flex justify-center items-center h-full px-10 py-5 uppercase rounded-lg bg-black text-white hover:bg-[#5BFFFC] hover:text-black"
-              type="submit"
-            >
-              Mint
-            </Button>
-            {!!mintFee && (
-              <span className="whitespace-nowrap text-secondary-text body-sm self-center">
-                {mintFee} APT
-              </span>
-            )}
-          </form>
-        </CardContent>
-      </Card>
+      <div className="mt-4">
+        <form onSubmit={handleSubmitMintNft} className="mint-form">
+          <Input
+            type="number"
+            value={nftCount}
+            min="1"
+            max="10"
+            onChange={(e) => setNftCount(parseInt(e.currentTarget.value, 10))}
+            className="mint-input"
+          />
+          <Button type="submit" className="mint-button">
+            Mint
+          </Button>
+        </form>
+        {!!mintFee && <span className="mint-fee">{mintFee} APT</span>}
+      </div>
     </section>
   );
 }
