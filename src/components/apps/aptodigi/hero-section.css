@@ -21,7 +21,7 @@
   transition: all 0.3s ease;
 }
 
-.hero-container::before {
+/* .hero-container::before {
   content: "";
   position: absolute;
   top: -50%;
@@ -35,7 +35,7 @@
   );
   transform: rotate(30deg);
   z-index: 2;
-}
+} */
 
 /* Theme sáng */
 body:not([data-theme="dark"]) .hero-container {

@@ -1,7 +1,6 @@
 import React from "react";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
 
 // Import components
 import { Button } from "../../shared/button";
@@ -24,8 +23,8 @@ export function StatsSection() {
   const { signAndSubmitTransaction } = useWallet();
 
   const { account, metadata } = useAccount();
-  const [nftCount, setNftCount] = useState(1);
-  const [mintFee, setMintFee] = useState(0);
+  const [nftCount, setNftCount] = React.useState(1);
+  const [mintFee, setMintFee] = React.useState(0);
 
   const { data } = useGetCollectionData(ABI.collection_id);
   const {
@@ -34,16 +33,6 @@ export function StatsSection() {
     totalMinted = 0,
     uniqueHolders = 0,
   } = data ?? {};
-
-  const getMintNFTConfig = function () {
-    return {
-      payload: {
-        function: `${ABI.address}::${ABI.name}::mint_nft`,
-        typeArguments: [],
-        functionArguments: [collection.collection_id, nftCount],
-      },
-    };
-  };
 
   const getMintFee = async function () {
     const response = await aptosClient().view({
@@ -67,31 +56,43 @@ export function StatsSection() {
   const handleSubmitMintNft = async (e) => {
     e.preventDefault();
 
+    console.log("Collection:", collection);
+    console.log("Account:", account);
+    console.log("Metadata:", metadata);
+    console.log("Mintfee:", mintFee);
+
     if (!collection?.collection_id) return;
     if (!account) {
       toast({
         variant: "destructive",
-        title: "Lỗi",
-        description: "Bạn phải kết nối ví trước khi mint",
+        title: "Aptodigi Error",
+        description:
+          "You have to connect to wallet before to do this transaction",
       });
       return;
     }
     if (metadata.balance !== undefined && metadata.balance < mintFee) {
       toast({
         variant: "destructive",
-        title: "Lỗi",
-        description: "Bạn không có đủ tiền để mint",
+        title: "Aptodigi Error",
+        description: "Insufficient fund",
       });
       return;
     }
 
-    const response = await signAndSubmitTransaction(getMintNFTConfig());
+    const response = await signAndSubmitTransaction({
+      data: {
+        function: `${ABI.address}::${ABI.name}::mint_nft`,
+        typeArguments: [],
+        functionArguments: [collection.collection_id, nftCount],
+      },
+    });
     await aptosClient().waitForTransaction({ transactionHash: response.hash });
     queryClient.invalidateQueries();
     setNftCount(1);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (collection) getMintFee().then((mintFee) => setMintFee(mintFee));
   }, [collection]);
 
@@ -128,7 +129,7 @@ export function StatsSection() {
             onChange={(e) => setNftCount(parseInt(e.currentTarget.value, 10))}
             className="mint-input"
           />
-          <Button type="submit" className="mint-button">
+          <Button type="submit" className="mint-button cursor-pointer">
             Mint
           </Button>
         </form>
