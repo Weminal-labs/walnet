@@ -8,5 +8,5 @@ export const ABI = {
       : "0x7768e9bcb09adfe6dbbee3a103951ad6199ea2eaa2e7cf78c5feae7a55a0e9d3",
   name: "launchpad",
   collection_id:
-    "0x191ee27bb08fd006c72996c593467ce9823e2bf6118c640896979ea7c3b8022a",
+    "0xbd96bde626a510145af0a845ac45174f5e111dff40ae9c1622bba59c01c82a92",
 };

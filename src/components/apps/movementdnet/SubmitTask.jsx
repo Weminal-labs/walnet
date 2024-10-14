@@ -73,7 +73,6 @@ export default function SubmitTask() {
 
   return (
     <div className="grid grid-cols-1 gap-6 relative z-10 mt-6 overflow-y-auto">
-      <ToastContainer position="top-right" autoClose={5000} theme="dark" />
       <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-6 rounded-lg shadow">
         <h2 className="text-2xl font-semibold mb-4 flex items-center text-white">
           <FaCloudUploadAlt className="mr-2 text-blue-400" /> Submit New Task
