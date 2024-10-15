@@ -355,7 +355,7 @@ const apps = [
     icon: "dorahacks",
     type: "app",
     action: "EXTERNAL",
-    payload: "https://dorahacks.io/buidl/16640/",
+    payload: "https://dorahacks.io/buidl/17456",
   },
   {
     name: "Aptos Names",
