@@ -16,6 +16,8 @@ import {
   TabsTrigger,
 } from "../../../components/shared/tab-set";
 import { Boxes } from "../../../components/shared/background-boxes";
+import WalnetCloud from "../../../components/apps/movementdnet/WalnetCloud";
+import WalnetWorker from "../../../components/apps/movementdnet/WalnetWoker";
 
 export const MovementDNet = () => {
   const wnapp = useSelector((state) => state.apps.aptosdnet);
@@ -48,21 +50,29 @@ export const MovementDNet = () => {
           <Tabs defaultValue="complete_task" className="w-full">
             <TabsList>
               <TabsTrigger value="query_task">Query Task</TabsTrigger>
-              <TabsTrigger value="complete_task">Complete Task</TabsTrigger>
-              <TabsTrigger value="register_node">Register Node</TabsTrigger>
+              {/* <TabsTrigger value="complete_task">Complete Task</TabsTrigger> */}
+              {/* <TabsTrigger value="register_node">Register Node</TabsTrigger> */}
               <TabsTrigger value="submit_task">Submit Task</TabsTrigger>
+              <TabsTrigger value="walnet_cloud">Walnet Cloud</TabsTrigger>
+              <TabsTrigger value="walnet_worker">Walnet Worker</TabsTrigger>
             </TabsList>
             <TabsContent value="query_task">
               <TaskStatus />
             </TabsContent>
-            <TabsContent value="complete_task">
+            {/* <TabsContent value="complete_task">
               <CompleteTask />
-            </TabsContent>
-            <TabsContent value="register_node">
+            </TabsContent> */}
+            {/* <TabsContent value="register_node">
               <RegisterNode />
-            </TabsContent>
+            </TabsContent> */}
             <TabsContent value="submit_task">
               <SubmitTask />
+            </TabsContent>
+            <TabsContent value="walnet_cloud">
+              <WalnetCloud />
+            </TabsContent>
+            <TabsContent value="walnet_worker">
+              <WalnetWorker />
             </TabsContent>
           </Tabs>
         </div>

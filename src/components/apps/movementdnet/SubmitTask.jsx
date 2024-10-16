@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from 'react';
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import {
   FaCloudUploadAlt,
@@ -15,10 +16,85 @@ import { useAccount } from "../../../hooks/useAccount";
 // Import utils
 import { MovementDNetABI } from "./utils/abi";
 import { aptosClient } from "../../../utils/aptos_client";
+import CustomSelect from "./CustomSelect";
 
 export default function SubmitTask() {
   const { account, metadata, refreshBalance } = useAccount();
   const { signAndSubmitTransaction } = useWallet();
+  const [clusterIds, setClusterIds] = useState([]);
+  const [selectedClusterId, setSelectedClusterId] = useState('');
+  const [selectedClusterInfo, setSelectedClusterInfo] = useState(null);
+
+  const clusterTypes = [
+    { id: 1, name: 'General', description: 'Best for prototyping or general E2E Workloads' },
+    { id: 2, name: 'Train', description: 'Production ready clusters for machine learning models training and fine tuning' },
+    { id: 3, name: 'Inference', description: 'Production ready clusters for low latency inference and heavy workloads' },
+  ];
+
+  const processors = [
+    { id: 1, name: 'M2 Pro', count: 38, type: 'apple' },
+    { id: 2, name: 'M2 Max', count: 27, type: 'apple' },
+    { id: 3, name: 'M3 Pro', count: 22, type: 'apple' },
+    { id: 4, name: 'M3', count: 18, type: 'apple' },
+    { id: 5, name: 'M3 Max', count: 11, type: 'apple' },
+    { id: 6, name: 'M2 Ultra', count: 6, type: 'apple' },
+    { id: 7, name: 'GeForce RTX 3080', count: 64, type: 'nvidia' },
+    { id: 8, name: 'H100 PCIe', count: 60, type: 'nvidia' },
+    { id: 9, name: 'GeForce RTX 4090', count: 56, type: 'nvidia' },
+    { id: 10, name: 'A100-PCIE-40GB', count: 24, type: 'nvidia' },
+    { id: 11, name: 'Tesla V100-SXM2-16GB', count: 0, type: 'nvidia' },
+  ];
+
+  useEffect(() => {
+    if (account) {
+      queryClustersId();
+    }
+  }, [account]);
+  console.log("account.address", account.address);
+
+  const queryClustersId = async () => {
+    try {
+      const response = await aptosClient().view({
+        payload: {
+          function: `${MovementDNetABI.address}::network::query_clusters_id`,
+          typeArguments: [],
+          functionArguments: [account.address],
+        },
+      });
+      setClusterIds(response[0]);
+      console.log("response", response);
+    } catch (error) {
+      console.error("Error querying cluster IDs:", error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch cluster IDs. Please try again.",
+      });
+    }
+  };
+
+  const handleClusterSelect = async (clusterId) => {
+    setSelectedClusterId(clusterId);
+    // if (clusterId) {
+    //   try {
+    //     const response = await aptosClient().view({
+    //       payload: {
+    //         function: `${MovementDNetABI.address}::network::query_cluster_info`,
+    //         typeArguments: [],
+    //         functionArguments: [clusterId],
+    //       },
+    //     });
+    //     setSelectedClusterInfo(response);
+    //   } catch (error) {
+    //     console.error("Error querying cluster info:", error);
+    //     toast({
+    //       title: "Error",
+    //       description: "Failed to fetch cluster information. Please try again.",
+    //     });
+    //   }
+    // } else {
+    //   setSelectedClusterInfo(null);
+    // }
+  };
 
   const handleSubmit = async function (e) {
     e.preventDefault();
@@ -29,8 +105,8 @@ export default function SubmitTask() {
     }
 
     const { target } = e;
-    const taskType = target["task_type"].value;
-    const computeUnits = target["compute_units"].value;
+    const cluster_type = 1;
+    const cluster_processor = 1;
     const reward = target["reward"].value;
 
     if (reward >= metadata.balance) {
@@ -47,7 +123,7 @@ export default function SubmitTask() {
         data: {
           function: `${MovementDNetABI.address}::network::submit_task`,
           typeArguments: [],
-          functionArguments: [taskType, computeUnits, reward],
+          functionArguments: [selectedClusterId, cluster_processor, cluster_type, reward],
         },
       });
       await aptosClient()
@@ -106,32 +182,32 @@ export default function SubmitTask() {
           </ul>
           <p>
             Simply fill out the form below to submit your task. Choose the task
-            type, specify the required compute units, and set your reward in APT
+            type, select the cluster and set your reward in APT
             tokens.
           </p>
         </div>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block mb-1 text-gray-300">Task Type</label>
-            <select
-              name="task_type"
-              className="w-full p-2 border rounded bg-white bg-opacity-10 border-gray-600 text-white"
-            >
-              <option value={1}>Machine Learning</option>
-              <option value={2}>Data Processing</option>
-              <option value={3}>Rendering</option>
-            </select>
-          </div>
-          <div>
-            <label className="block mb-1 text-gray-300">Compute Units</label>
-            <input
-              name="compute_units"
-              type="number"
-              className="w-full p-2 border rounded bg-white bg-opacity-10 border-gray-600 text-white"
-              placeholder="Enter required compute units"
+            <label className="block mb-1 text-gray-300">Select Cluster</label>
+            <CustomSelect
+              options={clusterIds}
+              value={selectedClusterId}
+              onChange={handleClusterSelect}
             />
           </div>
+
+          {selectedClusterInfo && (
+            <div className="mt-4 p-4 bg-gray-800 bg-opacity-50 rounded">
+              <p className="text-gray-300">
+                Cluster Type: {clusterTypes.find(t => t.id === selectedClusterInfo.cluster_type)?.name || 'Unknown'}
+              </p>
+              <p className="text-gray-300">
+                Processor: {processors.find(p => p.id === selectedClusterInfo.processor_id)?.name || 'Unknown'}
+              </p>
+            </div>
+          )}
+
           <div>
             <label className="block mb-1 text-gray-300">Reward (APT)</label>
             <input
@@ -141,7 +217,9 @@ export default function SubmitTask() {
               placeholder="Enter reward amount in APT"
             />
           </div>
-          <button className="bg-blue-500 bg-opacity-80 text-white px-4 py-2 rounded hover:bg-blue-600 w-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+
+          <button
+            className="bg-blue-500 bg-opacity-80 text-white px-4 py-2 rounded hover:bg-blue-600 w-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
             Submit Task
           </button>
         </form>
